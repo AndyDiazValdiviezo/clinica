@@ -54,7 +54,13 @@ class HELPERS {
 	}
 
 	public static function isJSON($string) {
-		return is_object(json_decode($string));
+		$validacion = false;
+
+		if (is_string($string)) {
+			$validacion = is_object(json_decode($string));
+		}
+
+		return $validacion;
 	}
 }
 ?>

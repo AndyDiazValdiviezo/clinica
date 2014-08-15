@@ -20,7 +20,10 @@
           <img src="{{ asset('img/logo.png') }}" alt="Clínica" class="main-logo">
           <span class="nombre">Clínica</span>
         </div>
-        {{ $htmlMenu }}
+        <div class="data-menu" data-menu='{{ $jsonMenus }}'></div>
+        <accordion close-others="true">
+          <accordion-group ng-repeat="menu in dataMenus"><div class="include" ng-include="'templates/menu.html'"></div></accordion-group>
+        </accordion>
       </div>
       <div class="col-lg-10 col-content">
         <div class="row main-header">

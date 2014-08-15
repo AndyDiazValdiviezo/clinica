@@ -1,8 +1,19 @@
 (function() {
-  function MenuCtrl($scope, $location) {
-    $scope.go = function (ruta) {
+  function MenuCtrl($scope, $location, MainService) {
+    $scope.verificar = function(item) {
+      if (item.subMenus) {
+        return false;
+      } else {
+        return true;
+      };
+    }
+
+    $scope.go = function(ruta) {
       $location.path('/tablas-maestras/colors');
     }
+
+    $scope.dataMenus = angular.element('.data-menu').data('menu');
+
   }
 
   angular

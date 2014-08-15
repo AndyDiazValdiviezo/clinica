@@ -71,39 +71,42 @@ html{
             border-radius: 0px;
             padding: 0px;
             .panel-title{
-              a{
+              .accordion-toggle{
                 display: block;
+                padding: 0;
                 color: @cl-menu-2;
                 font-family: @font-1;
                 font-size: 14px;
                 font-weight: 700;
-                padding: 14px 12px;
                 .transicion(0.15s);
-                .glyphicon{
-                  margin: 0px 12px 0px 0px;
+                .seccion{
+                  cursor: pointer;
+                }
+                .seccion.last{
+                  padding: 12px;
+                  background-color: @bkcl-menu-2;
+                  font-weight: normal;
+                  color: @cl-menu-2;
+                  .icono{
+                    margin: 0px 12px 0px 10px;
+                  }
+                }
+                .seccion:not(.last){
+                  padding: 15px;
+                  .icono{
+                    margin: 0px 12px 0px 0px;
+                  }
                 }
               }
-              a:hover{
+              .accordion-toggle:hover{
                 text-decoration: none;
                 color: #FFF;
               }
             }
           }
-          .panel-heading.last{
-            background-color: @bkcl-menu-2;
-            .panel-title{
-              a{
-                font-weight: normal;
-                color: @cl-menu-2;
-              }
-            }
-          }
-          .panel-heading:not(.last){
-            .panel-title{
-              a:hover{
-                background-color: @bkcl-menu-2;
-              }
-            }
+          .panel-body{
+            padding: 0;
+            border: 0;
           }
         }
         .col-content{

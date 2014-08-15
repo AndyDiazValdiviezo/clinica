@@ -17,10 +17,10 @@ class InicioController extends BaseController {
 			}
 		}
 
-		$htmlMenu = $this->getHtmlMenu($aMenus);
+		$aMenus = $this->jsonStringToArray($aMenus);
 
 		return View::make('inicio', array(
-				'htmlMenu' => $htmlMenu,
+				'jsonMenus' => json_encode($aMenus),
 			));
 	}
 
@@ -65,72 +65,29 @@ class InicioController extends BaseController {
 		return $arreglo;
 	}
 
-	private function getHtmlMenu($menus) {
-		$htmlMenu = '';
-
-		foreach ($menus as $menu) {
-			if (isset($menu['subMenus'])) {
-				if (count($menu['subMenus']) > 0) {
-					$htmlMenu .= '<div class="panel-group">';
-					$htmlMenu .= '<div class="panel panel-default">';
-					$htmlMenu .= '<div class="panel-heading" data-jerarquia="'.$menu['objeto']->CanJerarquia.'">';
-					$htmlMenu .= '<h4 class="panel-title">';
-					$htmlMenu .= '<a data-toggle="collapse" data-parent="#sidebar-menu" href="#cod-'.$menu['objeto']->nPerUsuAccCodigo.'" no-link-directive>';
-
-					if (HELPERS::isJSON($menu['objeto']->cParNombre)) {
-						$json = json_decode($menu['objeto']->cParNombre);
-
-						if ($json->tipo == 'menu') {
-							if (isset($json->icono)) {
-								$htmlMenu .= '<span class="icono '.$json->icono->bsClase.' '.$json->icono->color.'"></span>';
-							} else {
-								$htmlMenu .= '<span class="icono invisible glyphicon glyphicon-minus"></span>';
-							}
-						}
-					}
-
-					$htmlMenu .= '<span class="nombre">'.$menu['objeto']->NombreMenu.'</span>';
-					$htmlMenu .= '</a>';
-					$htmlMenu .= '</h4>';
-					$htmlMenu .= '</div>';
-					$htmlMenu .= '<div id="cod-'.$menu['objeto']->nPerUsuAccCodigo.'" class="panel-collapse collapse">';
-					$htmlMenu .= $this->getHtmlMenu($menu['subMenus']);
-					$htmlMenu .= '</div>';
-					$htmlMenu .= '</div>';
-					$htmlMenu .= '</div>';
-				}
-			} else {
-				$cParNombre = $menu['objeto']->cParNombre;
-				$ruta       = '';
-				if ($cParNombre != '') {
-					$json = json_decode($cParNombre);
-					$ruta = $json->nombreRuta;
-				}
-
-				$htmlMenu .= '<div class="panel-heading last" data-jerarquia="'.$menu['objeto']->CanJerarquia.'">';
-				$htmlMenu .= '<h4 class="panel-title">';
-				$htmlMenu .= '<a data-toggle="collapse" data-parent="#sidebar-menu" href="#cod-'.$menu['objeto']->nPerUsuAccCodigo.'" ng-click="go(\'#/'.$ruta.'\')" link-directive>';
-
-				if (HELPERS::isJSON($menu['objeto']->cParNombre)) {
-					$json = json_decode($menu['objeto']->cParNombre);
-
-					if ($json->tipo == 'menu') {
-						if (isset($json->icono)) {
-							$htmlMenu .= '<span class="icono '.$json->icono->bsClase.' '.$json->icono->color.'"></span>';
-						} else {
-							$htmlMenu .= '<span class="icono invisible glyphicon glyphicon-minus"></span>';
-						}
+	private function jsonStringToArray($data) {
+		foreach ($data as $key => $value) {
+			if (is_array($data)) {
+				if (is_array($data[$key]) || is_object($data[$key])) {
+					$data[$key] = $this->jsonStringToArray($data[$key]);
+				} else {
+					if (HELPERS::isJSON($data[$key])) {
+						$data[$key] = json_decode($data[$key]);
 					}
 				}
-
-				$htmlMenu .= '<span class="nombre">'.$menu['objeto']->NombreMenu.'</span>';
-				$htmlMenu .= '</a>';
-				$htmlMenu .= '</h4>';
-				$htmlMenu .= '</div>';
+			}
+			if (is_object($data)) {
+				if (is_array($data->$key) || is_object($data->$key)) {
+					$data->$key = $this->jsonStringToArray($data->$key);
+				} else {
+					if (HELPERS::isJSON($data->$key)) {
+						$data->$key = json_decode($data->$key);
+					}
+				}
 			}
 		}
 
-		return $htmlMenu;
+		return $data;
 	}
 }
 ?>

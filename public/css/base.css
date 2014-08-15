@@ -83,34 +83,43 @@ html body .main-content > .row .col-sidebar .panel-heading {
   border-radius: 0px;
   padding: 0px;
 }
-html body .main-content > .row .col-sidebar .panel-heading .panel-title a {
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle {
   display: block;
+  padding: 0;
   color: #7ca1bb;
   font-family: 'Source Sans Pro';
   font-size: 14px;
   font-weight: 700;
-  padding: 14px 12px;
   -webkit-transition: all 0.15s;
   -moz-transition: all 0.15s;
   -o-transition: all 0.15s;
   transition: all 0.15s;
 }
-html body .main-content > .row .col-sidebar .panel-heading .panel-title a .glyphicon {
-  margin: 0px 12px 0px 0px;
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle .seccion {
+  cursor: pointer;
 }
-html body .main-content > .row .col-sidebar .panel-heading .panel-title a:hover {
-  text-decoration: none;
-  color: #FFF;
-}
-html body .main-content > .row .col-sidebar .panel-heading.last {
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle .seccion.last {
+  padding: 12px;
   background-color: #16232d;
-}
-html body .main-content > .row .col-sidebar .panel-heading.last .panel-title a {
   font-weight: normal;
   color: #7ca1bb;
 }
-html body .main-content > .row .col-sidebar .panel-heading:not(.last) .panel-title a:hover {
-  background-color: #16232d;
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle .seccion.last .icono {
+  margin: 0px 12px 0px 10px;
+}
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle .seccion:not(.last) {
+  padding: 15px;
+}
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle .seccion:not(.last) .icono {
+  margin: 0px 12px 0px 0px;
+}
+html body .main-content > .row .col-sidebar .panel-heading .panel-title .accordion-toggle:hover {
+  text-decoration: none;
+  color: #FFF;
+}
+html body .main-content > .row .col-sidebar .panel-body {
+  padding: 0;
+  border: 0;
 }
 html body .main-content > .row .col-content .main-header {
   position: relative;
