@@ -1,5 +1,6 @@
 (function() {
-  function MenuCtrl($scope, $location, MainService) {
+  function MenuCtrl($scope, $location) {
+
     $scope.verificar = function(item) {
       if (item.subMenus) {
         return false;
@@ -13,7 +14,6 @@
     }
 
     $scope.dataMenus = angular.element('.data-menu').data('menu');
-
   }
 
   angular

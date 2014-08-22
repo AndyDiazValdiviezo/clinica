@@ -15,25 +15,25 @@ Route::get('/', 'InicioController@showInicio');
 
 Route::get('/tablas-maestras/colors', array(
 		'as'   => 'colors',
-		'uses' => 'ColorController@inicioJson',
+		'uses' => 'ColorController@jsonInicio',
 	));
 
 Route::post('/tablas-maestras/colors/filtrar', array(
 		'as'   => 'colorsFiltrar',
-		'uses' => 'ColorController@filtrarJson',
+		'uses' => 'ColorController@jsonFiltrar',
 	));
 
-Route::post('/tablas-maestras/colors/agregar', array(
+Route::match(array('GET', 'POST'), '/tablas-maestras/colors/agregar', array(
 		'as'   => 'colorsAgregar',
-		'uses' => 'ColorController@agregarJson',
+		'uses' => 'ColorController@jsonAgregar',
 	));
 
-Route::post('/tablas-maestras/colors/editar', array(
+Route::match(array('GET', 'POST'), '/tablas-maestras/colors/editar/{nParCodigo}/{nParClase}', array(
 		'as'   => 'colorsEditar',
-		'uses' => 'ColorController@editarJson',
+		'uses' => 'ColorController@jsonEditar',
 	));
 
-Route::post('/tablas-maestras/colors/eliminar', array(
+Route::get('/tablas-maestras/colors/eliminar/{nParCodigo}/{nParClase}', array(
 		'as'   => 'colorsEliminar',
-		'uses' => 'ColorController@eliminarJson',
+		'uses' => 'ColorController@jsonEliminar',
 	));

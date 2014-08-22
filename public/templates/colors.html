@@ -5,7 +5,7 @@
         <h1>Mantenedor de colores</h1>
       </div>
       <div class="col-lg-8 acciones">
-        <button type="button" class="btn btn-primary // boton.cParNombre.clase //" ng-repeat="boton in dataBotonera" ng-click="botoneraAccion(boton.cParNombre.clase)">
+        <button type="button" class="btn btn-primary // boton.cParNombre.clase //" ng-repeat="boton in dataBotonera()" ng-click="accionar(boton.cParNombre.clase)">
           <span class="// boton.cParNombre.icono // icono"></span>
           <span class="nombre">// boton.cParNombre.nombre //</span>
         </button>
@@ -21,24 +21,24 @@
         <table class="table table-striped tbl-registros">
           <tr class="tbl-busqueda">
             <td></td>
-            <td><input type="text" ng-model="camposBusqueda.cParDescripcion" ng-change="buscar(this)"></td>
+            <td><input type="text" ng-model="camposBusqueda().cParDescripcion" ng-change="buscar(this)"></td>
           </tr>
           <tr class="tbl-cabecera">
             <th>N°</th>
             <th>Nombre</th>
           </tr>
-          <tr ng-repeat="registro in dataRegistros" ng-click="seleccionarRegistro(registro)" class="tbl-fila" ng-class="{selected: registro.selected}">
+          <tr ng-repeat="registro in dataRegistros()" ng-click="seleccionarRegistro(registro)" class="tbl-fila" ng-class="{selected: registro.selected}">
             <td>// registro.index //</td>
             <td>// registro.cParDescripcion //</td>
           </tr>
         </table>
         <div class="row paginador" ng-controller="PaginadorCtrl as paginador">
           <div class="col-lg-6">
-            <span class="info">// generarTextoPaginacion(dataRegistros) //</span>
+            <span class="info">// generarTextoPaginacion(dataRegistros()) //</span>
           </div>
           <div class="col-lg-6">
             <ul class="pagination">
-              <li ng-repeat="boton in dataPaginador">
+              <li ng-repeat="boton in dataPaginador()">
               <a href=""ng-click="paginar(boton)" ng-class="{activo: boton.activo}">// boton.texto //</a>
               </li>
             </ul>

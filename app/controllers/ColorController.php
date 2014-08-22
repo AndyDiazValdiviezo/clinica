@@ -8,20 +8,20 @@ class ColorController extends BaseController {
 	 * [Busca y envía los datos de la vista en formato json]
 	 * @return [json] [Todos los datos de la vista]
 	 */
-	public function inicioJson() {
+	public function jsonInicio() {
 		// Botonera
-		$dataBotonera = DB::select('CALL usp_Get_Permisos_Botonera_By_Usuario(1, 0, 0, 0, 1001, 1, 1001, 1, 1000, 100101);');
+		$dbBotonera = DB::select('CALL usp_Get_Permisos_Botonera_By_Usuario(1, 0, 0, 0, 1001, 1, 1001, 1, 1000, 100101);');
 
-		$aBotonera = array();
+		$dataBotonera = array();
 
-		for ($i = 0; $i < count($dataBotonera); $i++) {
-			$fila = $dataBotonera[$i];
+		for ($i = 0; $i < count($dbBotonera); $i++) {
+			$fila = $dbBotonera[$i];
 
 			foreach ($fila as $property => $value) {
 				if (HELPERS::isJSON($value)) {
-					$aBotonera[$i][$property] = json_decode($value);
+					$dataBotonera[$i][$property] = json_decode($value);
 				} else {
-					$aBotonera[$i][$property] = $value;
+					$dataBotonera[$i][$property] = $value;
 				}
 			}
 		}
@@ -34,49 +34,44 @@ class ColorController extends BaseController {
 		$cParNombre      = "";
 		$cParDescripcion = "";
 
-		$aRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
-		$aRegistros = $this->completarRegistros($aRegistros, 1);
+		$dataRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
+		$dataRegistros = $this->completarRegistros($dataRegistros, 1);
 
 		// Total de registros
-		$aTodosRegistros = Parametro::buscarPorClase($this->nParClase);
-		$totalRegistros  = count($aTodosRegistros);
-		$nCanPaginas     = ceil($totalRegistros/$this->nCanReg);
+		$dataTodosRegistros = Parametro::buscarPorClase($this->nParClase);
+		$totalRegistros     = count($dataTodosRegistros);
+		$nCanPaginas        = ceil($totalRegistros/$this->nCanReg);
 
 		// Paginador
-		$aPaginador = HELPERS::getPaginador($nCanPaginas, 1);
-
-		// Formulario
-		$aFormulario = array(
-			'metodo' => 'POST',
-			'accion' => array(
-				'agregar'  => URL::route('colorsAgregar'),
-				'editar'   => URL::route('colorsEditar'),
-				'eliminar' => URL::route('colorsEliminar'),
-			),
-			'campos' => array(
-				array(
-					'label'       => 'Nombre',
-					'name'        => 'cParDescripcion',
-					'formType'    => 'text',
-					'placeholder' => 'Nombre',
-				),
-			),
-		);
+		$dataPaginador = HELPERS::getPaginador($nCanPaginas, 1);
 
 		// Rutas
-		$aRutas = array(
-			'agregar'  => URL::route('colorsAgregar'),
-			'editar'   => URL::route('colorsEditar'),
-			'eliminar' => URL::route('colorsEliminar'),
-			'filtrar'  => URL::route('colorsFiltrar'),
+		$dataRutas = array(
+			'agregar' => URL::route('colorsAgregar'),
+			'editar'  => array(
+				'url' => URL::route('colorsEditar', array(
+						'nParCodigo' => '-p-nParCodigo',
+						'nParClase'  => '-p-nParClase',
+					)
+				),
+				'parametros' => array('nParCodigo', 'nParClase'),
+			),
+			'eliminar' => array(
+				'url' => URL::route('colorsEliminar', array(
+						'nParCodigo' => '-p-nParCodigo',
+						'nParClase'  => '-p-nParClase',
+					)
+				),
+				'parametros' => array('nParCodigo', 'nParClase'),
+			),
+			'filtrar' => URL::route('colorsFiltrar'),
 		);
 
 		$data = array(
-			'aBotonera'      => $aBotonera,
-			'aRegistros'     => $aRegistros,
-			'aPaginador'     => $aPaginador,
-			'aFormulario'    => $aFormulario,
-			'aRutas'         => $aRutas,
+			'dataBotonera'   => $dataBotonera,
+			'dataRegistros'  => $dataRegistros,
+			'dataPaginador'  => $dataPaginador,
+			'dataRutas'      => $dataRutas,
 			'totalRegistros' => $totalRegistros,
 		);
 
@@ -87,7 +82,7 @@ class ColorController extends BaseController {
 	 * [Busca los y envía los registros]
 	 * @return [json] [Registros en formato json]
 	 */
-	public function filtrarJson() {
+	public function jsonFiltrar() {
 		$pagina          = Input::get('pagina');
 		$cParNombre      = Input::get('camposBusqueda.cParNombre');
 		$cParDescripcion = Input::get('camposBusqueda.cParDescripcion');
@@ -102,8 +97,8 @@ class ColorController extends BaseController {
 		$nPagRegistro = 1;
 		$nParClase    = $this->nParClase;
 
-		$aRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
-		$aRegistros = $this->completarRegistros($aRegistros, $pagina);
+		$dataRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
+		$dataRegistros = $this->completarRegistros($dataRegistros, $pagina);
 
 		// Total de registros
 		$nPagRegistro   = 0;
@@ -111,11 +106,11 @@ class ColorController extends BaseController {
 		$nCanPaginas    = ceil($totalRegistros/$nCanReg);
 
 		// Paginador
-		$aPaginador = HELPERS::getPaginador($nCanPaginas, $pagina);
+		$dataPaginador = HELPERS::getPaginador($nCanPaginas, $pagina);
 
 		$data = array(
-			'aRegistros'     => $aRegistros,
-			'aPaginador'     => $aPaginador,
+			'dataRegistros'  => $dataRegistros,
+			'dataPaginador'  => $dataPaginador,
 			'totalRegistros' => $totalRegistros,
 		);
 
@@ -126,70 +121,125 @@ class ColorController extends BaseController {
 	 * [Guardo un nuevo registro]
 	 * @return [json] [Respuesta en formato json]
 	 */
-	public function agregarJson() {
-		$nParClase       = $this->nParClase;
-		$cParNombre      = Input::get('cParDescripcion');
-		$cParDescripcion = Input::get('cParDescripcion');
+	public function jsonAgregar() {
+		if (Request::isMethod('get')) {
+			$dataFormulario = array(
+				'metodo' => 'POST',
+				'accion' => array(
+					'agregar'  => URL::route('colorsAgregar'),
+					'editar'   => URL::route('colorsEditar'),
+					'eliminar' => URL::route('colorsEliminar'),
+				),
+				'campos' => array(
+					array(
+						'name'        => 'cParDescripcion',
+						'value'       => '',
+						'label'       => 'Nombre',
+						'formType'    => 'text',
+						'placeholder' => 'Nombre',
+					),
+				),
+			);
 
-		$newParametro = Parametro::registrar($nParClase, $cParNombre, $cParDescripcion);
+			$data = array(
+				'dataFormulario' => $dataFormulario,
+			);
 
-		// Registros
-		$nOriReg         = 0;
-		$nCanReg         = $this->nCanReg;
-		$nPagRegistro    = 1;
-		$nParClase       = $this->nParClase;
-		$cParNombre      = "";
-		$cParDescripcion = "";
+			return json_encode($data);
 
-		$aRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
-		$aRegistros = $this->completarRegistros($aRegistros, 1);
+		} elseif (Request::isMethod('post')) {
 
-		// Total de registros
-		$aTodosRegistros = Parametro::buscarPorClase($this->nParClase);
-		$totalRegistros  = count($aTodosRegistros);
-		$nCanPaginas     = ceil($totalRegistros/$this->nCanReg);
+			$nParClase       = $this->nParClase;
+			$cParNombre      = Input::get('cParDescripcion');
+			$cParDescripcion = Input::get('cParDescripcion');
 
-		// Paginador
-		$aPaginador = HELPERS::getPaginador($nCanPaginas, 1);
+			$newParametro = Parametro::registrar($nParClase, $cParNombre, $cParDescripcion);
 
-		$data = array(
-			'aRegistros'     => $aRegistros,
-			'aPaginador'     => $aPaginador,
-			'totalRegistros' => $totalRegistros,
-		);
+			// Registros
+			$nOriReg         = 0;
+			$nCanReg         = $this->nCanReg;
+			$nPagRegistro    = 1;
+			$nParClase       = $this->nParClase;
+			$cParNombre      = "";
+			$cParDescripcion = "";
 
-		return json_encode($data);
+			$dataRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
+			$dataRegistros = $this->completarRegistros($dataRegistros, 1);
+
+			// Total de registros
+			$dataTodosRegistros = Parametro::buscarPorClase($this->nParClase);
+			$totalRegistros     = count($dataTodosRegistros);
+			$nCanPaginas        = ceil($totalRegistros/$this->nCanReg);
+
+			// Paginador
+			$dataPaginador = HELPERS::getPaginador($nCanPaginas, 1);
+
+			$data = array(
+				'dataRegistros'  => $dataRegistros,
+				'dataPaginador'  => $dataPaginador,
+				'totalRegistros' => $totalRegistros,
+			);
+
+			return json_encode($data);
+		}
+
 	}
 
-	public function editarJson() {
-		$nParCodigo      = Input::get('camposOcultos.nParCodigo.value');
-		$nParClase       = Input::get('camposOcultos.nParClase.value');
-		$cParNombre      = Input::get('cParNombre');
-		$cParDescripcion = Input::get('cParDescripcion');
+	public function jsonEditar($nParCodigo, $nParClase) {
+		if (Request::isMethod('get')) {
+			$parametro = Parametro::buscar($nParCodigo, $nParClase);
 
-		$updParametro = Parametro::actualizar($nParCodigo, $nParClase, $cParNombre, $cParDescripcion);
+			if ($parametro) {
+				$parametro = reset($parametro);
 
-		// Registros
-		$nOriReg         = 0;
-		$nCanReg         = $this->nCanReg;
-		$nPagRegistro    = 1;
-		$nParClase       = $this->nParClase;
-		$cParNombre      = "";
-		$cParDescripcion = "";
+				$dataFormulario = array(
+					'metodo' => 'POST',
+					'accion' => URL::route('colorsEditar'),
+					'campos' => array(
+						array(
+							'name'        => 'cParDescripcion',
+							'value'       => $parametro['cParDescripcion'],
+							'label'       => 'Nombre',
+							'formType'    => 'text',
+							'placeholder' => 'Nombre',
+						),
+					),
+				);
 
-		$aRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
-		$aRegistros = $this->completarRegistros($aRegistros, 1);
+				$data = array(
+					'dataFormulario' => $dataFormulario,
+				);
 
-		$data = array(
-			'aRegistros' => $aRegistros,
-		);
+				return json_encode($data);
+			}
 
-		return json_encode($data);
+		} elseif (Request::isMethod('post')) {
+			$cParNombre      = Input::get('cParNombre');
+			$cParDescripcion = Input::get('cParDescripcion');
+
+			$updParametro = Parametro::actualizar($nParCodigo, $nParClase, $cParNombre, $cParDescripcion);
+
+			// Registros
+			$nOriReg         = 0;
+			$nCanReg         = $this->nCanReg;
+			$nPagRegistro    = 1;
+			$nParClase       = $this->nParClase;
+			$cParNombre      = "";
+			$cParDescripcion = "";
+
+			$dataRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
+			$dataRegistros = $this->completarRegistros($dataRegistros, 1);
+
+			$data = array(
+				'dataRegistros' => $dataRegistros,
+			);
+
+			return json_encode($data);
+		}
+
 	}
 
-	public function eliminarJson() {
-		$nParCodigo = Input::get('nParCodigo.value');
-		$nParClase  = Input::get('nParClase.value');
+	public function jsonEliminar($nParCodigo, $nParClase) {
 		$nParEstado = 0;
 
 		$updnParCodigo = Parametro::eliminar($nParCodigo, $nParClase, $nParEstado);
@@ -202,20 +252,20 @@ class ColorController extends BaseController {
 		$cParNombre      = "";
 		$cParDescripcion = "";
 
-		$aRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
-		$aRegistros = $this->completarRegistros($aRegistros, 1);
+		$dataRegistros = Parametro::filtrar($nOriReg, $nCanReg, $nPagRegistro, $nParClase, $cParNombre, $cParDescripcion);
+		$dataRegistros = $this->completarRegistros($dataRegistros, 1);
 
 		// Total de registros
-		$aTodosRegistros = Parametro::buscarPorClase($this->nParClase);
-		$totalRegistros  = count($aTodosRegistros);
-		$nCanPaginas     = ceil($totalRegistros/$this->nCanReg);
+		$dataTodosRegistros = Parametro::buscarPorClase($this->nParClase);
+		$totalRegistros     = count($dataTodosRegistros);
+		$nCanPaginas        = ceil($totalRegistros/$this->nCanReg);
 
 		// Paginador
-		$aPaginador = HELPERS::getPaginador($nCanPaginas, 1);
+		$dataPaginador = HELPERS::getPaginador($nCanPaginas, 1);
 
 		$data = array(
-			'aRegistros'     => $aRegistros,
-			'aPaginador'     => $aPaginador,
+			'dataRegistros'  => $dataRegistros,
+			'dataPaginador'  => $dataPaginador,
 			'totalRegistros' => $totalRegistros,
 		);
 
@@ -226,15 +276,16 @@ class ColorController extends BaseController {
 	// ---------------MÉTODOS INTERNOS--------------- //
 	/////////////////////////////////////////////////////
 
-	private function completarRegistros($aRegistros, $pagina) {
-		for ($i = 0; $i < count($aRegistros); $i++) {
-			$aRegistros[$i]['index']    = ($this->nCanReg*($pagina-1))+$i+1;
-			$aRegistros[$i]['formData'] = array(
-				'cParDescripcion' => $aRegistros[$i]['cParDescripcion'],
+	private function completarRegistros($dataRegistros, $pagina) {
+		for ($i = 0; $i < count($dataRegistros); $i++) {
+			$dataRegistros[$i]['index']     = ($this->nCanReg*($pagina-1))+$i+1;
+			$dataRegistros[$i]['nParClase'] = $this->nParClase;
+			$dataRegistros[$i]['formData']  = array(
+				'cParDescripcion' => $dataRegistros[$i]['cParDescripcion'],
 				'camposOcultos'   => array(
 					'nParCodigo' => array(
 						'name'  => 'nParCodigo',
-						'value' => $aRegistros[$i]['nParCodigo'],
+						'value' => $dataRegistros[$i]['nParCodigo'],
 					),
 					'nParClase' => array(
 						'name'  => 'nParClase',
@@ -244,7 +295,7 @@ class ColorController extends BaseController {
 			);
 		}
 
-		return $aRegistros;
+		return $dataRegistros;
 	}
 }
 ?>

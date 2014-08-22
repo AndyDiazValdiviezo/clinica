@@ -5,6 +5,7 @@
   <title>Clinica</title>
   {{-- Estilos --}}
   {{ HTML::style('third-party/bootstrap/css/bootstrap.min.css') }}
+  {{ HTML::style('css/my-bootstrap.css') }}
   {{ HTML::style('css/base.css') }}
   {{ HTML::style('css/data.css') }}
   {{-- Google Fonts --}}
@@ -22,7 +23,7 @@
         </div>
         <div class="data-menu" data-menu='{{ $jsonMenus }}'></div>
         <accordion close-others="true">
-          <accordion-group ng-repeat="menu in dataMenus"><div class="include" ng-include="'templates/menu.html'"></div></accordion-group>
+          <accordion-group is-disabled="verificar(menu)" ng-repeat="menu in dataMenus"><div class="include" ng-include="'templates/menu.html'"></div></accordion-group>
         </accordion>
       </div>
       <div class="col-lg-10 col-content">
@@ -38,6 +39,7 @@
       </div>
     </div>
   </div>
+
   {{-- Scripts --}}
   {{ HTML::script('third-party/jquery/js/jquery-2.1.1.min.js') }}
   {{ HTML::script('third-party/angular-js/angular.min.js') }}
@@ -47,8 +49,10 @@
   {{ HTML::script('third-party/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js') }}
   {{-- Mis Stripts --}}
   {{ HTML::script('js/app.js') }}
-  {{ HTML::script('js/services/MainService.js') }}
+  {{ HTML::script('js/services/AjaxService.js') }}
+  {{ HTML::script('js/services/RegistrosService.js') }}
   {{ HTML::script('js/directives/LinkDirective.js') }}
+  {{ HTML::script('js/directives/ColorDataDirective.js') }}
   {{ HTML::script('js/directives/NoLinkDirective.js') }}
   {{ HTML::script('js/directives/DatosDirective.js') }}
   {{ HTML::script('js/controllers/MenuCtrl.js') }}
@@ -56,5 +60,10 @@
   {{ HTML::script('js/controllers/BotoneraCtrl.js') }}
   {{ HTML::script('js/controllers/RegistrosCtrl.js') }}
   {{ HTML::script('js/controllers/PaginadorCtrl.js') }}
+  {{ HTML::script('js/controllers/ModalAlertaCtrl.js') }}
+  {{-- Controlladores genéricos para modales --}}
+  {{ HTML::script('js/controllers/ModalDataCtrl.js') }}
+  {{ HTML::script('js/controllers/ModalEliminarCtrl.js') }}
+
 </body>
 </html>

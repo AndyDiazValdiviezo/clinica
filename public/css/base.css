@@ -72,7 +72,7 @@ html body .main-content > .row .col-sidebar .cont-main-logo .nombre {
   display: inline-block;
 }
 html body .main-content > .row .col-sidebar .panel-group {
-  margin: 10px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 html body .main-content > .row .col-sidebar .panel-group .panel {
   border-radius: 0px;

@@ -5,8 +5,8 @@
       templateUrl: 'templates/colors.html',
       controller: 'DataCtrl',
       resolve: {
-        data: function(MainService) {
-          return MainService.getAsync('/tablas-maestras/colors');
+        data: function(AjaxService) {
+          return AjaxService.ajaxGet('/tablas-maestras/colors');
         },
       },
     });

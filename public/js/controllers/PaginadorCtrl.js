@@ -1,14 +1,48 @@
 (function() {
-  function PaginadorCtrl($scope, MainService) {
+  function PaginadorCtrl($scope, RegistrosService, AjaxService) {
     //////////////////////////////////////////
     // ----------OBJETOS INTERNOS---------- //
     //////////////////////////////////////////
 
-    $scope.paginaActual = 1;
-    $scope.camposBusqueda = {};
-    $scope.dataPaginador = MainService.getInitData().aPaginador;
-    $scope.dataRutas = MainService.getInitData().aRutas;
-    $scope.totalRegistros = MainService.getInitData().totalRegistros;
+    $scope.paginaActual = function(value) {
+      if (value) {
+        RegistrosService.paginaActual = value;
+      } else {
+        return RegistrosService.paginaActual;
+      };
+    }
+
+    $scope.camposBusqueda = function(value) {
+      if (value) {
+        RegistrosService.camposBusqueda = value;
+      } else {
+        return RegistrosService.camposBusqueda;
+      };
+    }
+
+    $scope.dataPaginador = function(value) {
+      if (value) {
+        RegistrosService.initData.dataPaginador = value;
+      } else {
+        return RegistrosService.initData.dataPaginador;
+      };
+    }
+
+    $scope.dataRutas = function(value) {
+      if (value) {
+        RegistrosService.initData.dataRutas = value;
+      } else {
+        return RegistrosService.initData.dataRutas;
+      };
+    }
+
+    $scope.totalRegistros = function(value) {
+      if (value) {
+        RegistrosService.initData.totalRegistros = value;
+      } else {
+        return RegistrosService.initData.totalRegistros;
+      };
+    }
 
 
     //////////////////////////////////////////
@@ -18,39 +52,47 @@
     $scope.paginar = function(boton) {
       $scope.asignarBotonActivo(boton);
       var pagina = boton.pagina;
-      $scope.paginaActual = pagina;
-      $scope.$emit('actualizarPaginaActual', pagina);
+      RegistrosService.paginaActual = pagina;
 
       var objData = {
         'pagina': pagina,
-        'camposBusqueda': $scope.camposBusqueda,
+        'camposBusqueda': $scope.camposBusqueda(),
       };
 
+
       var data = $.param(objData);
-      var responsePromise = MainService.postAsync($scope.dataRutas.filtrar, data);
+      var responsePromise = AjaxService.ajaxPostJson($scope.dataRutas().filtrar, data);
 
       responsePromise.then(function(data, status, headers, config) {
-        $scope.$emit('recargarRegistros', data.aRegistros);
-        $scope.generarTextoPaginacion(data.aRegistros);
+        $scope.dataRegistros(data.dataRegistros);
+        $scope.dataPaginador(data.dataPaginador);
+        $scope.totalRegistros(data.totalRegistros);
+
+        $scope.generarTextoPaginacion(data.dataRegistros);
+
       }, function(error) {
         console.log(error);
       });
     }
 
     $scope.asignarBotonActivo = function(boton) {
-      for (var i = 0; i < $scope.dataPaginador.length; i++) {
-        $scope.dataPaginador[i].activo = false;
+      var dataPaginador = $scope.dataPaginador();
+
+      for (var i = 0; i < dataPaginador.length; i++) {
+        dataPaginador[i].activo = false;
       };
 
       if (boton.inicial || boton.final) {
-        for (var i = 0; i < $scope.dataPaginador.length; i++) {
-          if ($scope.dataPaginador[i].pagina == boton.pagina && $scope.dataPaginador[i] != boton) {
-            $scope.dataPaginador[i].activo = true;
+        for (var i = 0; i < dataPaginador.length; i++) {
+          if (dataPaginador[i].pagina == boton.pagina && dataPaginador[i] != boton) {
+            dataPaginador[i].activo = true;
           };
         };
       } else {
         boton.activo = true;
       };
+
+      $scope.dataPaginador(dataPaginador);
     };
 
     $scope.generarTextoPaginacion = function(dataRegistros) {
@@ -60,40 +102,12 @@
         var regInicio = dataRegistros[0].index;
         var regFin = dataRegistros[dataRegistros.length - 1].index;
 
-        texto = 'Registros ' + regInicio + ' - ' + regFin + ' de ' + $scope.totalRegistros;
+        texto = 'Registros ' + regInicio + ' - ' + regFin + ' de ' + $scope.totalRegistros();
       };
 
       return texto;
     }
 
-    ///////////////////////////////////////////////
-    // -----------------EVENTOS----------------- //
-    // ---(comunicación entre controladores)---- //
-    ///////////////////////////////////////////////
-
-    $scope.$on('recargarPaginador', function(evt, data) {
-      $scope.dataPaginador = data;
-    });
-
-    $scope.$on('actualizarCamposBusqueda', function(evt, data) {
-      $scope.camposBusqueda = data;
-    });
-
-    $scope.$on('actualizarPaginaActual', function(evt, data) {
-      $scope.paginaActual = data;
-    });
-
-    $scope.$on('limpiarCamposBusqueda', function(evt) {
-      $scope.camposBusqueda = {};
-    });
-
-    $scope.$on('actualizarTotalRegistros', function(evt, data) {
-      $scope.totalRegistros = data;
-    });
-
-    $scope.$on('generarTextoPaginacion', function(evt, data) {
-      $scope.generarTextoPaginacion(data);
-    });
   }
 
   angular

@@ -12,6 +12,15 @@ class Parametro extends Eloquent {
 	protected $nParEstado;
 
 	/**
+	 * [Búsqueda para un único parámetro]
+	 * @return [Parámetro]
+	 */
+	public static function buscar($nParCodigo, $nParClase) {
+		$query = "CALL usp_Buscar_Parametro('$nParCodigo', '$nParClase')";
+		return HELPERS::stdArrayToArray(DB::select($query));
+	}
+
+	/**
 	 * [Búsqueda de parametros por clase]
 	 * @return [Arreglo de párametros]
 	 */
