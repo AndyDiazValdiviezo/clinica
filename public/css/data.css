@@ -140,7 +140,8 @@
   background-color: #f0f3f4 !important;
 }
 .data-content .row.registros .cont-registros .panel .tbl-registros tr.tbl-fila.selected td {
-  background-color: #f0f3f4 !important;
+  background-color: #edf1f2 !important;
+  color: #23b7e5;
 }
 .data-content .row.registros .cont-registros .panel .tbl-registros.table-striped > tbody > tr:nth-child(odd) > td,
 .data-content .row.registros .cont-registros .panel .tbl-registros.table-striped > tbody > tr:nth-child(odd) th {

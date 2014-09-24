@@ -28,6 +28,14 @@
       };
     }
 
+    $scope.dataCamposVista = function(value) {
+      if (value === undefined) {
+        return RegistrosService.initData.dataCamposVista;
+      } else {
+        RegistrosService.initData.dataCamposVista = value;
+      };
+    }
+
     $scope.totalRegistros = function(value) {
       if (value === undefined) {
         return RegistrosService.initData.totalRegistros;
@@ -88,8 +96,11 @@
         'camposBusqueda': $scope.camposBusqueda(),
       };
 
+      console.log(objData);
+
       var data = $.param(objData);
       var responsePromise = AjaxService.ajaxPostJson($scope.dataRutas().filtrar, data);
+
 
       responsePromise.then(function(data, status, headers, config) {
         $scope.dataRegistros(data.dataRegistros);

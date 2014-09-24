@@ -1,14 +1,13 @@
 (function() {
-  function ColorDataDirective() {
+  function ModalDataDirective($timeout, ScrollTo) {
     return {
       restrict: 'EA',
       link: function($scope, $element, $attrs) {
-        console.log("asdasas");
       }
     }
   }
 
   angular
     .module('clinicaApp')
-    .directive('ColorData', ColorDataDirective);
+    .directive('modalData', ModalDataDirective);
 })();

@@ -35,10 +35,6 @@
       };
     }
 
-    // $scope.modalData = angular.element('#modal-data');
-    $scope.modalRemove = angular.element('#modal-remove');
-    $scope.modalAlert = angular.element('#modal-alert');
-
 
     //////////////////////////////////////////
     // ----------MÉTODOS INTERNOS---------- //
@@ -53,8 +49,9 @@
           var responsePromise = AjaxService.ajaxGet(ruta);
 
           responsePromise.then(function(data, status, headers, config) {
+            console.log(data);
             $modal.open({
-              templateUrl: 'templates/color-data.html',
+              templateUrl: 'templates/persona-data.html',
               controller: 'ModalDataCtrl',
               size: 'md',
               backdrop: 'static',
@@ -89,8 +86,9 @@
             var responsePromise = AjaxService.ajaxGet(ruta);
 
             responsePromise.then(function(data, status, headers, config) {
+              console.log(data);
               var modalData = $modal.open({
-                templateUrl: 'templates/color-data.html',
+                templateUrl: 'templates/persona-data.html',
                 controller: 'ModalDataCtrl',
                 size: 'md',
                 resolve: {
@@ -149,14 +147,6 @@
           };
           break;
       }
-    }
-
-    $scope.cerrarModalData = function() {
-      $scope.modalData.modal('hide');
-    }
-
-    $scope.cerrarModalRemove = function() {
-      $scope.modalRemove.modal('hide');
     }
 
   }

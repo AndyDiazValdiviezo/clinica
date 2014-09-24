@@ -10,7 +10,7 @@
     }
 
     $scope.go = function(ruta) {
-      $location.path('/tablas-maestras/colors');
+      $location.path(ruta);
     }
 
     $scope.dataMenus = angular.element('.data-menu').data('menu');

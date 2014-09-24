@@ -1,0 +1,171 @@
+<div class="modal-data" persona-data modal-data>
+  <div class="modal-header">
+    <h1 class="modal-title">Registrar persona</h1>
+  </div>
+  <div class="modal-body">
+    <form name="formData" ng-class="{submited: submited}" ng-init="setFormScope(this)" ng-submit="submit()" novalidate>
+      <tabset ng-init="tipoPersona = 'natural'">
+        <tab heading="// tipo.nombre //" ng-repeat="tipo in dataFormulario.tiposPersona" ng-click="dataFormulario.tipoPersona = tipo.key">
+          <!-- Persona natural -->
+          <div ng-show="dataFormulario.tipoPersona == 'natural'">
+            <!-- Campos estáticos -->
+            <div class="form-group row">
+              <!-- Nombre -->
+              <div class="col-lg-12">
+                <label>// camposNatural().cPerNombre.label //</label>
+                <input type="text" class="form-control" placeholder="// camposNatural().cPerNombre.placeholder //" ng-model="camposNatural().cPerNombre.value" ng-required="camposNatural().cPerNombre.required" name="cPerNombre">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Apellido paterno -->
+              <div class="col-lg-6">
+                <label>// camposNatural().cPerNatApePaterno.label //</label>
+                <input type="text" class="form-control" placeholder="// camposNatural().cPerNatApePaterno.placeholder //" ng-model="camposNatural().cPerNatApePaterno.value" ng-required="camposNatural().cPerNatApePaterno.required" name="cPerNatApePaterno">
+              </div>
+              <!-- Apellido materno -->
+              <div class="col-lg-6">
+                <label>// camposNatural().cPerNatApeMaterno.label //</label>
+                <input type="text" class="form-control" placeholder="// camposNatural().cPerNatApeMaterno.placeholder //" ng-model="camposNatural().cPerNatApeMaterno.value" name="cPerNatApeMaterno">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Estado civil -->
+              <div class="col-lg-6">
+                <label>// camposNatural().nPerNatEstCivil.label //</label>
+                <select class="form-control" ng-model="camposNatural().nPerNatEstCivil.value" ng-options="option.value as option.nombre for option in camposNatural().nPerNatEstCivil.options" name="nPerNatEstCivil"></select>
+              </div>
+              <!-- Sexo -->
+              <div class="col-lg-6">
+                <label>// camposNatural().nPerNatSexo.label //</label>
+
+                <div class="radio">
+                  <label class="i-checks checkbox-inline" ng-repeat="option in camposNatural().nPerNatSexo.options">
+                    <input type="radio" ng-model="camposNatural().nPerNatSexo.value" ng-value="option.value">
+                    <i></i>
+                    // option.nombre //
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Fecha de nacimiento -->
+              <div class="col-lg-6">
+                <label>// camposNatural().dPerNacimiento.label //</label>
+                <div class="input-group datepicker">
+                  <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="camposNatural().dPerNacimiento.value" name="dPerNacimiento" is-open="datePicker.opened" close-text="Close"/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Documento -->
+              <!-- Número -->
+              <div class="col-lg-12">
+                <label>// camposNatural().documento.label //</label>
+              </div>
+              <div class="col-lg-6">
+                <input class="form-control" placeholder="// camposNatural().documento.cPerDocNumero.placeholder //" ng-model="camposNatural().documento.cPerDocNumero.value" name="cPerDocNumero">
+              </div>
+              <!-- Tipo -->
+              <div class="col-lg-6">
+                <div class="radio">
+                  <label class="i-checks checkbox-inline" ng-repeat="option in camposNatural().documento.nPerDocTipo.options">
+                    <input type="radio" ng-model="camposNatural().documento.nPerDocTipo.value" ng-value="option.value">
+                    <i></i>
+                    // option.nombre //
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Dirección -->
+              <!-- Nombre -->
+              <div class="col-lg-12">
+                <label>// camposNatural().direccion.label //</label>
+                <input type="text" class="form-control" placeholder="// camposNatural().direccion.cPerDirDescripcion.placeholder //" ng-model="camposNatural().direccion.cPerDirDescripcion.value" name="cPerDirDescripcion">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Teléfono -->
+              <!-- Número -->
+              <div class="col-lg-6">
+                <label>// camposNatural().telefono.label //</label>
+                <input type="text" class="form-control" placeholder="// camposNatural().telefono.cPerTelNumero.placeholder //" ng-model="camposNatural().telefono.cPerTelNumero.value" name="cPerTelNumero">
+              </div>
+              <!-- Email -->
+              <!-- Número -->
+              <div class="col-lg-6">
+                <label>// camposNatural().email.label //</label>
+                <input type="text" class="form-control" placeholder="// camposNatural().email.cPerMail.placeholder //" ng-model="camposNatural().email.cPerMail.value" name="cPerMail">
+              </div>
+            </div>
+          </div>
+
+          <!-- Persona jurídica -->
+          <div ng-show="dataFormulario.tipoPersona == 'juridica'">
+            <!-- Campos estáticos -->
+            <div class="form-group row">
+              <!-- Nombre -->
+              <div class="col-lg-12">
+                <label>// camposJuridica().cPerNombre.label //</label>
+                <input type="text" class="form-control" placeholder="// camposJuridica().cPerNombre.placeholder //" ng-model="camposJuridica().cPerNombre.value">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Descripción -->
+              <div class="col-lg-12">
+                <label>// camposJuridica().cPerJurDescripcion.label //</label>
+                <input type="text" class="form-control" placeholder="// camposJuridica().cPerJurDescripcion.placeholder //" ng-model="camposJuridica().cPerJurDescripcion.value">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Rubro -->
+              <div class="col-lg-12">
+                <label>// camposJuridica().nPerJurRubro.label //</label>
+                <select class="form-control" ng-model="camposJuridica().nPerJurRubro.value" ng-options="option.value as option.nombre for option in camposJuridica().nPerJurRubro.options"></select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Dirección -->
+              <!-- Nombre -->
+              <div class="col-lg-12">
+                <label>// camposJuridica().direccion.label //</label>
+                <input type="text" class="form-control" placeholder="// camposJuridica().direccion.cPerDirDescripcion.placeholder //" ng-model="camposJuridica().direccion.cPerDirDescripcion.value">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <!-- Teléfono -->
+              <!-- Número -->
+              <div class="col-lg-6">
+                <label>// camposJuridica().telefono.label //</label>
+                <input type="text" class="form-control" placeholder="// camposJuridica().telefono.cPerTelNumero.placeholder //" ng-model="camposJuridica().telefono.cPerTelNumero.value">
+              </div>
+              <!-- Email -->
+              <!-- Número -->
+              <div class="col-lg-6">
+                <label>// camposJuridica().email.label //</label>
+                <input type="text" class="form-control" placeholder="// camposJuridica().email.cPerMail.placeholder //" ng-model="camposJuridica().email.cPerMail.value">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+          </div>
+        </tab>
+      </tabset>
+    </form>
+  </div>
+</div>

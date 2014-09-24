@@ -1,0 +1,182 @@
+@import 'globales.less';
+@import 'parametros.less';
+
+.modal-data{
+  .modal-body{
+    padding: 12px;
+    background-color: @bkcl-mod-dat-1;
+    .nav-tabs{
+      border-bottom: 1px solid @bdcl-mod-dat-1;
+      >li{
+        >a{
+          .corner(0px, 0px, 0px, 0px);
+          cursor: pointer;
+        }
+      }
+      >li:not(.active){
+        >a{
+          color: @cl-mod-dat-1;
+        }
+        >a:hover{
+          background-color: @bkcl-mod-dat-2;
+          color: @cl-mod-dat-2;
+        }
+      }
+    }
+    .tab-content{
+      padding: 12px;
+      background-color: #FFF;
+      border-left: 1px solid @bdcl-mod-dat-1;
+      border-right: 1px solid @bdcl-mod-dat-1;
+      border-bottom: 1px solid @bdcl-mod-dat-1;
+      .titulo-seccion{
+        font-family: @font-1;
+        font-size: 15px;
+        color: @cl-mod-2;
+      }
+      .titulo-seccion:first-child{
+        margin: 10px 0px 10px 0px;
+      }
+      .titulo-seccion:not(:first-child){
+        margin: 30px 0px 10px 0px;
+      }
+      .divisor-seccion{
+        margin: 10px 0px;
+        border-color: @bdcl-mod-1;
+      }
+      .divisor-fila{
+        margin: 10px 0px 10px 0px;
+        border-style: dashed;
+        border-color: @bdcl-mod-1;
+      }
+      .radio, .check{
+        margin: 6px 0px 4px 0px;
+      }
+      .i-checks{
+        input{
+          opacity: 0;
+        }
+        input[type="radio"]{
+          +i, +i:before{
+            border-radius: 50%;
+          }
+        }
+        >i{
+          width: 20px;
+          height: 20px;
+          line-height: 1;
+          border: 1px solid @bdcl-mod-dat-2;
+          background-color: #fff;
+          margin-left: -20px;
+          margin-top: -2px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 4px;
+          position: relative;
+        }
+        >i:before{
+          content: "";
+          position: absolute;
+          left: 10px;
+          top: 10px;
+          width: 0px;
+          height: 0px;
+          background-color: transparent;
+          .transicion(0.2s);
+        }
+        input:checked{
+          +i{
+            border-color: @bkcl-mod-dat-3;
+          }
+          +i:before{
+            left: 4px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background-color: @bkcl-mod-dat-3;
+          }
+        }
+      }
+      .datepicker{
+        .input-group-btn{
+          >.btn{
+            border-color: @bdcl-mod-2;
+            .corner(0px, 0px, 0px, 0px);
+          }
+        }
+        .dropdown-menu{
+          .corner(0px, 0px, 0px, 0px);
+          li{
+            table{
+              .btn-default{
+                border-color: transparent;
+                .corner(0px, 0px, 0px, 0px);
+              }
+              .btn.active{
+                .shadow(0px, 0px, 0px, 0px, #000);
+              }
+              .btn:active{
+                .shadow(0px, 0px, 0px, 0px, #000);
+              }
+            }
+            table:focus{
+              outline: none;
+            }
+          }
+        }
+      }
+      .btn-dinamico{
+        margin: 0px 0px 10px 0px;
+        padding: 0;
+        background: #FFF;
+        color: @cl-btn-1;
+        font-family: @font-1;
+        border: 1px solid @bdcl-mod-2;
+        .corner(0px, 0px, 0px, 0px);
+        .transicion(0.2s);
+        .icono{
+          width: 30px;
+          margin: -1px 0px 0px 0px;
+          border-left: 1px solid @bdcl-mod-2;
+          float: right;
+          font-size: 11px;
+          line-height: 30px;
+          .transicion(0.2s);
+        }
+        .nombre{
+          padding: 5px 10px 0px 10px;
+          float: right;
+          font-size: 12px;
+        }
+      }
+      .btn-dinamico:hover{
+        color: #FFF;
+        background-color: @bkcl-mod-dat-3;
+        border: 1px solid @bkcl-mod-dat-3;
+        .icono{
+          background-color: @bkcl-mod-dat-3 * 0.9;
+          border-left: 1px solid @bkcl-mod-dat-3;
+        }
+      }
+      .btn-dinamico:focus{
+        outline: none;
+      }
+      .btn-eliminar{
+        margin: 0px 0px 0px 10px;
+        padding: 6px 10px;
+        border: 1px solid @bdcl-mod-2;
+        .corner(0px, 0px, 0px, 0px);
+        .transicion(0.2s);
+      }
+      .btn-eliminar:hover{
+        color: #FFF;
+        background-color: @bkcl-mod-dat-4;
+        border-color: @bkcl-mod-dat-4;
+      }
+    }
+    .modal-footer{
+      margin: 20px 0px 0px 0px;
+      padding: 15px 15px 5px 15px;
+    }
+  }
+}

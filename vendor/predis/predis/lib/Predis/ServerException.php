@@ -16,27 +16,24 @@ namespace Predis;
  *
  * @author Daniele Alessandri <suppakilla@gmail.com>
  */
-class ServerException extends PredisException implements ResponseErrorInterface
-{
-    /**
-     * Gets the type of the error returned by Redis.
-     *
-     * @return string
-     */
-    public function getErrorType()
-    {
-        list($errorType, ) = explode(' ', $this->getMessage(), 2);
+class ServerException extends PredisException implements ResponseErrorInterface {
+	/**
+	 * Gets the type of the error returned by Redis.
+	 *
+	 * @return string
+	 */
+	public function getErrorType() {
+		list($errorType, ) = explode(' ', $this->getMessage(), 2);
 
-        return $errorType;
-    }
+		return $errorType;
+	}
 
-    /**
-     * Converts the exception to an instance of ResponseError.
-     *
-     * @return ResponseError
-     */
-    public function toResponseError()
-    {
-        return new ResponseError($this->getMessage());
-    }
+	/**
+	 * Converts the exception to an instance of ResponseError.
+	 *
+	 * @return ResponseError
+	 */
+	public function toResponseError() {
+		return new ResponseError($this->getMessage());
+	}
 }

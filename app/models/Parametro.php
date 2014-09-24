@@ -2,15 +2,6 @@
 class Parametro extends Eloquent {
 	protected $table = 'parametro';
 
-	protected $timetamps = false;
-
-	protected $nParCodigo;
-	protected $nParClase;
-	protected $cParJerarquia;
-	protected $cParNombre;
-	protected $cParDescripcion;
-	protected $nParEstado;
-
 	/**
 	 * [Búsqueda para un único parámetro]
 	 * @return [Parámetro]

@@ -10,6 +10,15 @@
         },
       },
     });
+    $routeProvider.when('/tablas-maestras/personas', {
+      templateUrl: 'templates/personas.html',
+      controller: 'DataCtrl',
+      resolve: {
+        data: function(AjaxService) {
+          return AjaxService.ajaxGet('/tablas-maestras/personas');
+        },
+      },
+    });
 
     // Cambio los símbolos {{}} por conflicto con laravel
     $interpolateProvider.startSymbol('//');
@@ -17,7 +26,6 @@
   }
 
   angular
-    .module('clinicaApp', ['ngRoute', 'ui.bootstrap', 'angular-blocks'])
+    .module('clinicaApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-blocks', 'ngScrollTo'])
     .config(config);
 })();
-

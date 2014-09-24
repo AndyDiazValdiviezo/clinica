@@ -3,8 +3,8 @@
 
     this.initData = {};
     this.paginaActual = 1;
-    this.camposBusqueda = {};
     this.registroSeleccionado;
+    this.camposBusqueda = {};
     this.botoneraAccion = '';
 
   }

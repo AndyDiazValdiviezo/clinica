@@ -1,0 +1,211 @@
+.border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.content-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.modal-data .modal-body {
+  padding: 12px;
+  background-color: #f0f3f4;
+}
+.modal-data .modal-body .nav-tabs {
+  border-bottom: 1px solid #dee5e7;
+}
+.modal-data .modal-body .nav-tabs > li > a {
+  border-radius: 0px 0px 0px 0px;
+  -ms-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -khtml-border-radius: 0px 0px 0px 0px;
+  cursor: pointer;
+}
+.modal-data .modal-body .nav-tabs > li:not(.active) > a {
+  color: #363f44;
+}
+.modal-data .modal-body .nav-tabs > li:not(.active) > a:hover {
+  background-color: #f6f8f8;
+  color: #141719;
+}
+.modal-data .modal-body .tab-content {
+  padding: 12px;
+  background-color: #FFF;
+  border-left: 1px solid #dee5e7;
+  border-right: 1px solid #dee5e7;
+  border-bottom: 1px solid #dee5e7;
+}
+.modal-data .modal-body .tab-content .titulo-seccion {
+  font-family: 'Source Sans Pro';
+  font-size: 15px;
+  color: #58666e;
+}
+.modal-data .modal-body .tab-content .titulo-seccion:first-child {
+  margin: 10px 0px 10px 0px;
+}
+.modal-data .modal-body .tab-content .titulo-seccion:not(:first-child) {
+  margin: 30px 0px 10px 0px;
+}
+.modal-data .modal-body .tab-content .divisor-seccion {
+  margin: 10px 0px;
+  border-color: #dee5e7;
+}
+.modal-data .modal-body .tab-content .divisor-fila {
+  margin: 10px 0px 10px 0px;
+  border-style: dashed;
+  border-color: #dee5e7;
+}
+.modal-data .modal-body .tab-content .radio,
+.modal-data .modal-body .tab-content .check {
+  margin: 6px 0px 4px 0px;
+}
+.modal-data .modal-body .tab-content .i-checks input {
+  opacity: 0;
+}
+.modal-data .modal-body .tab-content .i-checks input[type="radio"] + i,
+.modal-data .modal-body .tab-content .i-checks input[type="radio"] + i:before {
+  border-radius: 50%;
+}
+.modal-data .modal-body .tab-content .i-checks > i {
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  border: 1px solid #cfdadd;
+  background-color: #fff;
+  margin-left: -20px;
+  margin-top: -2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  position: relative;
+}
+.modal-data .modal-body .tab-content .i-checks > i:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.modal-data .modal-body .tab-content .i-checks input:checked + i {
+  border-color: #23b7e5;
+}
+.modal-data .modal-body .tab-content .i-checks input:checked + i:before {
+  left: 4px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #23b7e5;
+}
+.modal-data .modal-body .tab-content .datepicker .input-group-btn > .btn {
+  border-color: #cfdadd;
+  border-radius: 0px 0px 0px 0px;
+  -ms-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -khtml-border-radius: 0px 0px 0px 0px;
+}
+.modal-data .modal-body .tab-content .datepicker .dropdown-menu {
+  border-radius: 0px 0px 0px 0px;
+  -ms-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -khtml-border-radius: 0px 0px 0px 0px;
+}
+.modal-data .modal-body .tab-content .datepicker .dropdown-menu li table .btn-default {
+  border-color: transparent;
+  border-radius: 0px 0px 0px 0px;
+  -ms-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -khtml-border-radius: 0px 0px 0px 0px;
+}
+.modal-data .modal-body .tab-content .datepicker .dropdown-menu li table .btn.active {
+  -webkit-box-shadow: 0px 0px 0px 0px #000000;
+  -moz-box-shadow: 0px 0px 0px 0px #000000;
+  box-shadow: 0px 0px 0px 0px #000000;
+}
+.modal-data .modal-body .tab-content .datepicker .dropdown-menu li table .btn:active {
+  -webkit-box-shadow: 0px 0px 0px 0px #000000;
+  -moz-box-shadow: 0px 0px 0px 0px #000000;
+  box-shadow: 0px 0px 0px 0px #000000;
+}
+.modal-data .modal-body .tab-content .datepicker .dropdown-menu li table:focus {
+  outline: none;
+}
+.modal-data .modal-body .tab-content .btn-dinamico {
+  margin: 0px 0px 10px 0px;
+  padding: 0;
+  background: #FFF;
+  color: #58666e;
+  font-family: 'Source Sans Pro';
+  border: 1px solid #cfdadd;
+  border-radius: 0px 0px 0px 0px;
+  -ms-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -khtml-border-radius: 0px 0px 0px 0px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.modal-data .modal-body .tab-content .btn-dinamico .icono {
+  width: 30px;
+  margin: -1px 0px 0px 0px;
+  border-left: 1px solid #cfdadd;
+  float: right;
+  font-size: 11px;
+  line-height: 30px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.modal-data .modal-body .tab-content .btn-dinamico .nombre {
+  padding: 5px 10px 0px 10px;
+  float: right;
+  font-size: 12px;
+}
+.modal-data .modal-body .tab-content .btn-dinamico:hover {
+  color: #FFF;
+  background-color: #23b7e5;
+  border: 1px solid #23b7e5;
+}
+.modal-data .modal-body .tab-content .btn-dinamico:hover .icono {
+  background-color: #20a5ce;
+  border-left: 1px solid #23b7e5;
+}
+.modal-data .modal-body .tab-content .btn-dinamico:focus {
+  outline: none;
+}
+.modal-data .modal-body .tab-content .btn-eliminar {
+  margin: 0px 0px 0px 10px;
+  padding: 6px 10px;
+  border: 1px solid #cfdadd;
+  border-radius: 0px 0px 0px 0px;
+  -ms-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -khtml-border-radius: 0px 0px 0px 0px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.modal-data .modal-body .tab-content .btn-eliminar:hover {
+  color: #FFF;
+  background-color: #ed2a2a;
+  border-color: #ed2a2a;
+}
+.modal-data .modal-body .modal-footer {
+  margin: 20px 0px 0px 0px;
+  padding: 15px 15px 5px 15px;
+}

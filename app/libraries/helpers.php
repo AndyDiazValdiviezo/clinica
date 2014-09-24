@@ -28,9 +28,9 @@ class HELPERS {
 				'final'  => true,
 			);
 			array_push($aPaginador, $aBotonFin);
-		}
 
-		$aPaginador[$paginaActual]['activo'] = true;
+			$aPaginador[$paginaActual]['activo'] = true;
+		}
 
 		return $aPaginador;
 	}
@@ -61,6 +61,11 @@ class HELPERS {
 		}
 
 		return $validacion;
+	}
+
+	public static function formatStringDate($stringDate, $format) {
+		$date = new DateTime($stringDate);
+		return $date->format($format);
 	}
 }
 ?>

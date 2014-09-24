@@ -10,7 +10,18 @@ class ColorController extends BaseController {
 	 */
 	public function jsonInicio() {
 		// Botonera
-		$dbBotonera = DB::select('CALL usp_Get_Permisos_Botonera_By_Usuario(1, 0, 0, 0, 1001, 1, 1001, 1, 1000, 100101);');
+		$nPerTipo         = 1;
+		$nPerEstado       = 0;
+		$nPerUsuEstado    = 0;
+		$nPerUsuAccEstado = 0;
+		$nParClase        = 5001;
+		$cPerCodigo       = 1;
+		$nPerUsuAccGrupo  = 1001;
+		$nParTipo         = 1;
+		$nParSrcClase     = 5000;
+		$nParSrcCodigo    = 100101;
+
+		$dbBotonera = DB::select("CALL usp_Get_Permisos_Botonera_By_Usuario('$nPerTipo', '$nPerEstado', '$nPerUsuEstado', '$nPerUsuAccEstado', '$nParClase', '$cPerCodigo', '$nPerUsuAccGrupo', '$nParTipo', '$nParSrcClase', '$nParSrcCodigo');");
 
 		$dataBotonera = array();
 

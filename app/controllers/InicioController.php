@@ -1,14 +1,23 @@
 <?php
 
 class InicioController extends BaseController {
-	function showInicio() {
-		$dataMenu = DB::select('Call usp_Get_Permisos_By_Usuario(1, 0, 0, 0, 1000, 1, 10);');
+	function inicio() {
+		$nPerTipo         = 1;
+		$nPerEstado       = 0;
+		$nPerUsuEstado    = 0;
+		$nPerUsuAccEstado = 0;
+		$nParClase        = 5000;
+		$cPerCodigo       = 1;
+		$nPerUsuAccGrupo  = 10;
+
+		$dataMenu = DB::select("Call usp_Get_Permisos_By_Usuario('$nPerTipo', '$nPerEstado', '$nPerUsuEstado', '$nPerUsuAccEstado', '$nParClase', '$cPerCodigo', '$nPerUsuAccGrupo');");
 
 		$aMenus = array();
 
 		foreach ($dataMenu as $key => $objFila) {
-			$codigo   = $objFila->nPerUsuAccCodigo;
-			$objPadre = $this->buscarPadre($dataMenu, $objFila);
+			$objFila->ruta = URL::route('personas', array(), false);
+			$codigo        = $objFila->nPerUsuAccCodigo;
+			$objPadre      = $this->buscarPadre($dataMenu, $objFila);
 
 			if ($objPadre) {
 				$aMenus = $this->setHijoRecursivo($objFila, $objPadre->nPerUsuAccCodigo, $aMenus);
@@ -19,7 +28,7 @@ class InicioController extends BaseController {
 
 		$aMenus = $this->jsonStringToArray($aMenus);
 
-		return View::make('inicio', array(
+		return View::make('index', array(
 				'jsonMenus' => json_encode($aMenus),
 			));
 	}

@@ -1,0 +1,12 @@
+.animate-if.ng-enter {
+  -webkit-animation: fadeInDown 0.5s;
+  animation: fadeInDown 0.5s;
+}
+.animate-if.ng-leave {
+  -webkit-animation: fadeOutUp 0.5s;
+  animation: fadeOutUp 0.5s;
+}
+.tab-pane.active {
+  -webkit-animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s;
+}

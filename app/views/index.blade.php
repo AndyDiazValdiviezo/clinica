@@ -5,9 +5,12 @@
   <title>Clinica</title>
   {{-- Estilos --}}
   {{ HTML::style('third-party/bootstrap/css/bootstrap.min.css') }}
+  {{ HTML::style('third-party/animate-css/animate.css') }}
   {{ HTML::style('css/my-bootstrap.css') }}
   {{ HTML::style('css/base.css') }}
   {{ HTML::style('css/data.css') }}
+  {{ HTML::style('css/modal-data.css') }}
+  {{ HTML::style('css/animaciones.css') }}
   {{-- Google Fonts --}}
   {{ HTML::style('http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700') }}
 </head>
@@ -44,15 +47,16 @@
   {{ HTML::script('third-party/jquery/js/jquery-2.1.1.min.js') }}
   {{ HTML::script('third-party/angular-js/angular.min.js') }}
   {{ HTML::script('third-party/angular-js/angular-route.min.js') }}
+  {{ HTML::script('third-party/angular-js/angular-animate.min.js') }}
   {{ HTML::script('third-party/angular-blocks/angular-blocks.js') }}
-  {{-- {{ HTML::script('third-party/bootstrap/js/bootstrap.min.js') }} --}}
+  {{ HTML::script('third-party/ng-scrollto/ng-scrollto.js') }}
   {{ HTML::script('third-party/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js') }}
   {{-- Mis Stripts --}}
   {{ HTML::script('js/app.js') }}
   {{ HTML::script('js/services/AjaxService.js') }}
   {{ HTML::script('js/services/RegistrosService.js') }}
   {{ HTML::script('js/directives/LinkDirective.js') }}
-  {{ HTML::script('js/directives/ColorDataDirective.js') }}
+  {{ HTML::script('js/directives/PersonaDataDirective.js') }}
   {{ HTML::script('js/directives/NoLinkDirective.js') }}
   {{ HTML::script('js/directives/DatosDirective.js') }}
   {{ HTML::script('js/controllers/MenuCtrl.js') }}
