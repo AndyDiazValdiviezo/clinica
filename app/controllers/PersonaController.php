@@ -533,53 +533,15 @@ private $camposVista = array(
 					PerDocumento::registrar($cPerCodigo, $nPerDocTipo, $cPerDocNumero, $dPerDocCaducidad, $nPerDocCategoria);
 				}
 
-				// Dirección
-				$nPerDirTipo   = 1;
-				$nPerDirEstado = 1;
-				if (count(PerDireccion::buscar($cPerCodigo)) > 0) {
-					if ($cPerDirDescripcion != '') {
-						PerDireccion::actualizar($cPerCodigo, $cPerDirDescripcion, $nPerDirTipo);
-					} else {
-						PerDireccion::eliminar($cPerCodigo);
-					}
-
-				} elseif ($cPerDirDescripcion != '') {
-					PerDireccion::registrar($cPerCodigo, $cPerDirDescripcion, $nPerDirTipo, $nPerDirEstado);
-				}
-
-				// Teléfono
-				$nPerTelTipo = '';
-				if (count(PerTelefono::buscar($cPerCodigo)) > 0) {
-					if ($cPerTelNumero != '') {
-						PerTelefono::actualizar($cPerCodigo, $nPerTelTipo, $cPerTelNumero);
-					} else {
-						PerTelefono::eliminar($cPerCodigo);
-					}
-
-				} elseif ($cPerTelNumero != '') {
-					PerTelefono::registrar($cPerCodigo, $nPerTelTipo, $cPerTelNumero);
-				}
-
-				// Email
-				if (count(PerMail::buscar($cPerCodigo)) > 0) {
-					if ($cPerMail != '') {
-						PerMail::actualizar($cPerCodigo, $cPerMail);
-					} else {
-						PerMail::eliminar($cPerCodigo);
-					}
-
-				} elseif ($cPerMail != '') {
-					PerMail::registrar($cPerCodigo, $cPerMail);
-				}
-
-
 			} elseif ($tipoPersona == 'juridica') {
 				// Obtengo los datos
+
+				// Persona
+				$cPerNombre     = Input::get('camposForm.juridica.cPerNombre.value');
 
 				// Persona Jurídica
 				$cPerJurDescripcion = Input::get('camposForm.juridica.cPerJurDescripcion.value');
 				$nPerJurRubro       = Input::get('camposForm.juridica.nPerJurRubro.value');
-				$cPerNombre         = Input::get('camposForm.juridica.cPerNombre.value');
 				$nPerEmpresa        = $cPerNombre;
 
 				// Dirección
@@ -605,14 +567,6 @@ private $camposVista = array(
 					Persona::actualizar($cPerCodigo, $cPerNombre, $cPerApellidos, $dPerNacimiento, $nPerEstado);
 					PerJuridica::actualizar($cPerCodigo, $cPerJurDescripcion, $nPerEmpresa, $nPerJurRubro);
 
-					$nPerDirTipo = 1;
-					PerDireccion::actualizar($cPerCodigo, $cPerDirDescripcion, $nPerDirTipo);
-
-					$nPerTelTipo = '';
-					PerTelefono::actualizar($cPerCodigo, $nPerTelTipo, $cPerTelNumero);
-
-					PerMail::actualizar($cPerCodigo, $cPerMail);
-
 				} else {
 					// Persona
 					$newPersona = Persona::registrar($cPerNombre, $cPerApellidos, $dPerNacimiento, $nPerTipo, $nPerEstado);
@@ -621,19 +575,46 @@ private $camposVista = array(
 
 					// Persona jurídica
 					PerJuridica::registrar($cPerCodigo, $cPerJurDescripcion, $nPerEmpresa, $nPerJurRubro);
-
-					// Dirección
-					$nPerDirTipo   = 1;
-					$nPerDirEstado = 1;
-					PerDireccion::registrar($cPerCodigo, $cPerDirDescripcion, $nPerDirTipo, $nPerDirEstado);
-
-					// Teléfono
-					$nPerTelTipo = '';
-					PerTelefono::registrar($cPerCodigo, $nPerTelTipo, $cPerTelNumero);
-
-					// Email
-					PerMail::registrar($cPerCodigo, $cPerMail);
 				}
+			}
+
+			// Dirección
+			$nPerDirTipo   = 1;
+			$nPerDirEstado = 1;
+			if (count(PerDireccion::buscar($cPerCodigo)) > 0) {
+				if ($cPerDirDescripcion != '') {
+					PerDireccion::actualizar($cPerCodigo, $cPerDirDescripcion, $nPerDirTipo);
+				} else {
+					PerDireccion::eliminar($cPerCodigo);
+				}
+
+			} elseif ($cPerDirDescripcion != '') {
+				PerDireccion::registrar($cPerCodigo, $cPerDirDescripcion, $nPerDirTipo, $nPerDirEstado);
+			}
+
+				// Teléfono
+			$nPerTelTipo = '';
+			if (count(PerTelefono::buscar($cPerCodigo)) > 0) {
+				if ($cPerTelNumero != '') {
+					PerTelefono::actualizar($cPerCodigo, $nPerTelTipo, $cPerTelNumero);
+				} else {
+					PerTelefono::eliminar($cPerCodigo);
+				}
+
+			} elseif ($cPerTelNumero != '') {
+				PerTelefono::registrar($cPerCodigo, $nPerTelTipo, $cPerTelNumero);
+			}
+
+				// Email
+			if (count(PerMail::buscar($cPerCodigo)) > 0) {
+				if ($cPerMail != '') {
+					PerMail::actualizar($cPerCodigo, $cPerMail);
+				} else {
+					PerMail::eliminar($cPerCodigo);
+				}
+
+			} elseif ($cPerMail != '') {
+				PerMail::registrar($cPerCodigo, $cPerMail);
 			}
 
 			// Registros

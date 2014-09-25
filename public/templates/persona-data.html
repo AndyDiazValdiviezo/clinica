@@ -13,7 +13,7 @@
               <!-- Nombre -->
               <div class="col-lg-12">
                 <label>// camposNatural().cPerNombre.label //</label>
-                <input type="text" class="form-control" placeholder="// camposNatural().cPerNombre.placeholder //" ng-model="camposNatural().cPerNombre.value" ng-required="camposNatural().cPerNombre.required" name="cPerNombre">
+                <input type="text" class="form-control" placeholder="// camposNatural().cPerNombre.placeholder //" ng-model="camposNatural().cPerNombre.value" ng-required="camposNatural().cPerNombre.required && dataFormulario.tipoPersona == 'natural'" name="cPerNombre">
               </div>
             </div>
 
@@ -21,7 +21,7 @@
               <!-- Apellido paterno -->
               <div class="col-lg-6">
                 <label>// camposNatural().cPerNatApePaterno.label //</label>
-                <input type="text" class="form-control" placeholder="// camposNatural().cPerNatApePaterno.placeholder //" ng-model="camposNatural().cPerNatApePaterno.value" ng-required="camposNatural().cPerNatApePaterno.required" name="cPerNatApePaterno">
+                <input type="text" class="form-control" placeholder="// camposNatural().cPerNatApePaterno.placeholder //" ng-model="camposNatural().cPerNatApePaterno.value" ng-required="camposNatural().cPerNatApePaterno.required && dataFormulario.tipoPersona == 'natural'" name="cPerNatApePaterno">
               </div>
               <!-- Apellido materno -->
               <div class="col-lg-6">
@@ -110,13 +110,14 @@
           </div>
 
           <!-- Persona jurídica -->
+
           <div ng-show="dataFormulario.tipoPersona == 'juridica'">
             <!-- Campos estáticos -->
             <div class="form-group row">
               <!-- Nombre -->
               <div class="col-lg-12">
                 <label>// camposJuridica().cPerNombre.label //</label>
-                <input type="text" class="form-control" placeholder="// camposJuridica().cPerNombre.placeholder //" ng-model="camposJuridica().cPerNombre.value">
+                <input type="text" class="form-control" placeholder="// camposJuridica().cPerNombre.placeholder //" ng-model="camposJuridica().cPerNombre.value" ng-required="camposJuridica().cPerNombre.required && dataFormulario.tipoPersona == 'juridica'">
               </div>
             </div>
 
@@ -124,7 +125,7 @@
               <!-- Descripción -->
               <div class="col-lg-12">
                 <label>// camposJuridica().cPerJurDescripcion.label //</label>
-                <input type="text" class="form-control" placeholder="// camposJuridica().cPerJurDescripcion.placeholder //" ng-model="camposJuridica().cPerJurDescripcion.value">
+                <input type="text" class="form-control" placeholder="// camposJuridica().cPerJurDescripcion.placeholder //" ng-model="camposJuridica().cPerJurDescripcion.value" ng-required="camposJuridica().cPerJurDescripcion.required">
               </div>
             </div>
 

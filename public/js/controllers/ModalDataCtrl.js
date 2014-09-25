@@ -50,13 +50,11 @@
 
       } else {
         for (var prop in $scope.formScope.formData.$error) {
-          if ($scope.formScope.formData.$error.hasOwnProperty(prop)) {
-
-            for (var i = 0; i < $scope.formScope.formData.$error[prop].length; i++) {
-              ScrollTo.idOrName($scope.formScope.formData.$error[prop][i].$name);
-              break;
-            };
-          }
+          console.log($scope.formScope.formData.$error[prop]);
+          for (var i = 0; i < $scope.formScope.formData.$error[prop].length; i++) {
+            ScrollTo.idOrName($scope.formScope.formData.$error[prop][i].$name);
+            break;
+          };
         }
       };
     }
