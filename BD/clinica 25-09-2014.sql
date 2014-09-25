@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2014-09-24 18:04:08
+Date: 2014-09-25 17:28:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -481,6 +481,8 @@ INSERT INTO `perdireccion` VALUES ('1000000001', '0', '1', 'Dirección 43', null
 INSERT INTO `perdireccion` VALUES ('1000000001', '0', '1', 'Dirección 43', null, '0');
 INSERT INTO `perdireccion` VALUES ('1000000001', '0', '1', 'Dirección 44', null, '0');
 INSERT INTO `perdireccion` VALUES ('1000000001', '0', '1', 'Dirección 45', null, '1');
+INSERT INTO `perdireccion` VALUES ('2000000002', '0', '1', 'Dir jur 2', null, '0');
+INSERT INTO `perdireccion` VALUES ('2000000002', '0', '1', 'Dir jur 3', null, '1');
 
 -- ----------------------------
 -- Table structure for perdocumento
@@ -536,6 +538,8 @@ CREATE TABLE `perjuridica` (
 -- ----------------------------
 -- Records of perjuridica
 -- ----------------------------
+INSERT INTO `perjuridica` VALUES ('2000000001', '1', '', '0');
+INSERT INTO `perjuridica` VALUES ('2000000002', '1', 'Trololo', '0');
 
 -- ----------------------------
 -- Table structure for permail
@@ -556,6 +560,9 @@ CREATE TABLE `permail` (
 -- ----------------------------
 INSERT INTO `permail` VALUES ('1000000001', '1', 'correo2', '0');
 INSERT INTO `permail` VALUES ('1000000001', '2', 'correo 4', '0');
+INSERT INTO `permail` VALUES ('1000000001', '3', 'listo@', '0');
+INSERT INTO `permail` VALUES ('2000000002', '1', 'correo 2', '0');
+INSERT INTO `permail` VALUES ('2000000002', '2', 'correo ok', '1');
 
 -- ----------------------------
 -- Table structure for pernatural
@@ -638,6 +645,8 @@ CREATE TABLE `persona` (
 -- ----------------------------
 INSERT INTO `persona` VALUES ('1', 'Andy', 'Diaz Valdiviezo', '1987-02-04', '1', '1');
 INSERT INTO `persona` VALUES ('1000000001', 'Nombre 1', 'Apellido paterno 1 Apellido materno 1', '2014-09-26', '1', '1');
+INSERT INTO `persona` VALUES ('2000000001', 'juridica', '', '0000-00-00', '2', '1');
+INSERT INTO `persona` VALUES ('2000000002', 'Empresa jurídica', '', '0000-00-00', '2', '1');
 
 -- ----------------------------
 -- Table structure for pertelefono
@@ -873,46 +882,14 @@ IF (nPagRegistro = 1) THEN
     pm.nPerMailEstado
 FROM
     persona p          
-LEFT JOIN
-    (
-        SELECT
-            * 
-        FROM
-            perdireccion 
-        order by
-            perdireccion.nPerDirEstado DESC
-    ) pd                 
-        ON pd.cpercodigo = p.cpercodigo          
-LEFT JOIN
-    (
-        SELECT
-            * 
-        FROM
-            perdocumento 
-        order by
-            perdocumento.nPerDocEstado DESC
-    ) pdoc                 
-        ON pdoc.cpercodigo = p.cpercodigo          
-LEFT JOIN
-    (
-        SELECT
-            * 
-        FROM
-            pertelefono 
-        order by
-            pertelefono.nPerTelEstado DESC
-    )  pt                 
-        ON pt.cpercodigo = p.cpercodigo          
-LEFT JOIN
-    (
-        SELECT
-            * 
-        FROM
-            permail 
-        order by
-            permail.nPerMailEstado DESC
-    )  pm                 
-        ON pm.cpercodigo = p.cpercodigo   
+LEFT JOIN (SELECT ipd.cPerCodigo, IF(ipd.nPerDirEstado != 0,ipd.cPerDirDescripcion,'') as cPerDirDescripcion, ipd.nPerDirEstado FROM perdireccion ipd order by ipd.nPerDirEstado DESC) pd 
+              ON pd.cpercodigo = p.cpercodigo 
+       LEFT JOIN (SELECT ipdoc.cPerCodigo, IF(ipdoc.nPerDocEstado != 0, ipdoc.cPerDocNumero, '') as cPerDocNumero, ipdoc.nPerDocTipo, ipdoc.nPerDocEstado FROM perdocumento ipdoc order by ipdoc.nPerDocEstado DESC) pdoc 
+              ON pdoc.cpercodigo = p.cpercodigo 
+       LEFT JOIN (SELECT ipt.cPerCodigo, IF(ipt.nPerTelEstado != 0, ipt.cPerTelNumero, '') as cPerTelNumero, ipt.nPerTelEstado FROM pertelefono ipt order by ipt.nPerTelEstado DESC)  pt 
+              ON pt.cpercodigo = p.cpercodigo 
+       LEFT JOIN  (SELECT ipm.cPerCodigo, IF(ipm.nPerMailEstado != 0, ipm.cPerMail, '') as cPerMail, ipm.nPerMailEstado FROM permail ipm order by ipm.nPerMailEstado DESC)  pm 
+              ON pm.cpercodigo = p.cpercodigo 
 WHERE
     p.nperestado = 1          
     AND (
