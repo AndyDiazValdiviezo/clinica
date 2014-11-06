@@ -15,7 +15,12 @@ class InicioController extends BaseController {
 		$aMenus = array();
 
 		foreach ($dataMenu as $key => $objFila) {
-			$objFila->ruta = URL::route('personas', array(), false);
+			$objNombre  =json_decode($objFila->cParNombre);
+
+			if (isset($objNombre->nombreRuta)) {
+				$objFila->ruta = URL::route($objNombre->nombreRuta, array(), false);
+			}
+
 			$codigo        = $objFila->nPerUsuAccCodigo;
 			$objPadre      = $this->buscarPadre($dataMenu, $objFila);
 
@@ -29,7 +34,7 @@ class InicioController extends BaseController {
 		$aMenus = $this->jsonStringToArray($aMenus);
 
 		return View::make('index', array(
-				'jsonMenus' => json_encode($aMenus),
+			'jsonMenus' => json_encode($aMenus),
 			));
 	}
 

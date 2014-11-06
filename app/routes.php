@@ -11,8 +11,14 @@
 |
  */
 
+////////////////////////////////
+// ----------INICIO---------- //
+////////////////////////////////
 Route::get('/', 'InicioController@inicio');
 
+//////////////////////////////////
+// ----------PERSONAS---------- //
+//////////////////////////////////
 Route::get('/tablas-maestras/personas', array(
 	'as'   => 'personas',
 	'uses' => 'PersonaController@inicio',
@@ -38,17 +44,11 @@ Route::get('/tablas-maestras/personas/eliminar/{cPerCodigo}', array(
 	'uses' => 'PersonaController@eliminar',
 ));
 
-Route::match(array('GET', 'POST'), '/tablas-maestras/colors/agregar', array(
-	'as'   => 'colorsAgregar',
-	'uses' => 'ColorController@jsonAgregar',
-));
+///////////////////////////////////
+// ----------RESULTADOS--------- //
+///////////////////////////////////
 
-Route::match(array('GET', 'POST'), '/tablas-maestras/colors/editar/{nParCodigo}/{nParClase}', array(
-	'as'   => 'colorsEditar',
-	'uses' => 'ColorController@jsonEditar',
-));
-
-Route::get('/tablas-maestras/colors/eliminar/{nParCodigo}/{nParClase}', array(
-	'as'   => 'colorsEliminar',
-	'uses' => 'ColorController@jsonEliminar',
+Route::get('/laboratorios/resultados', array(
+	'as'   => 'resultados',
+	'uses' => 'ResultadoController@inicio',
 ));
